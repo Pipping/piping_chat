@@ -81,8 +81,8 @@ class Server_sender extends Thread{
 class tcp_server {
 public static void main(String argv[])throws Exception{
     String user_name_server;
-    BufferedReader uinp=new BufferedReader(new InputStreamReader(System.in));
-    user_name_server=uinp.readLine();
+    //BufferedReader uinp=new BufferedReader(new InputStreamReader(System.in));
+    //user_name_server=uinp.readLine();
     //String ip_str=argv[0];
     //InetAddress ip=InetAddress.getByName(ip_str);
 	ServerSocket server_socket=new ServerSocket(6969);
