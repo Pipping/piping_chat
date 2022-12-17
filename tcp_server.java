@@ -83,9 +83,11 @@ public static void main(String argv[])throws Exception{
     String user_name_server;
     BufferedReader uinp=new BufferedReader(new InputStreamReader(System.in));
     user_name_server=uinp.readLine();
+    //String ip_str=argv[0];
+    //InetAddress ip=InetAddress.getByName(ip_str);
 	ServerSocket server_socket=new ServerSocket(6969);
     ArrayList<Socket> users=new ArrayList<Socket>();
-
+    //System.out.println("server ip:"+server_socket.getInetAddress());
     while(true){
         Socket connecting_socket=server_socket.accept();
         users.add(connecting_socket);
