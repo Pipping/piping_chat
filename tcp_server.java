@@ -77,6 +77,30 @@ class Server_sender extends Thread{
        }
     }
 }
+class Deleter extends Thread{
+    ArrayList<Socket> users;
+    
+    public Deleter(){
+        users=new ArrayList<Socket>();
+    }
+
+    public void run(){
+       try {
+        while(true){
+            for(int i=0;i<users.size();++i){
+                if(!users.get(i).isConnected()){
+                    System.out.println("deletin one");
+                    users.get(i).close();
+                    users.remove(i);
+                    break;
+                }
+            }
+        }
+       } catch (Exception e) {
+        // TODO: handle exception
+       }
+    }
+}
 
 class tcp_server {
 public static void main(String argv[])throws Exception{
@@ -85,17 +109,19 @@ public static void main(String argv[])throws Exception{
     user_name_server=uinp.readLine();
 	ServerSocket server_socket=new ServerSocket(6969);
     ArrayList<Socket> users=new ArrayList<Socket>();
-   
-   
+    Deleter deleter=new Deleter();
+    
     
     while(true){
         Socket connecting_socket=server_socket.accept();
         users.add(connecting_socket);
-        //System.out.println("user size::"+users.size());
-        
-        Server_reader sr_thread=new Server_reader(connecting_socket,users);
+        deleter.users.add(connecting_socket);
+        System.out.println("user size::"+deleter.users.size());
+        deleter.start();
+        Server_reader sr_thread=new Server_reader(connecting_socket,deleter.users);
         //Server_sender ss_thread=new Server_sender(connecting_socket,user_name_server,message);
         //ss_thread.start();
+        
         sr_thread.start();
         
     }
