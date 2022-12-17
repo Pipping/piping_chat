@@ -31,6 +31,7 @@ class Server_reader extends Thread {
             	String client_string=in_f_server.readLine();
                 
             	System.out.println(client_string);
+                //to prevent echoing the users' own input back
                 for(int i=0;i<clients.size();++i){
                     if(client.getInetAddress()!=clients.get(i).getInetAddress()){
                         DataOutputStream o_t_server=new DataOutputStream(clients.get(i).getOutputStream());
