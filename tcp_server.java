@@ -85,9 +85,7 @@ public static void main(String argv[])throws Exception{
     user_name_server=uinp.readLine();
 	ServerSocket server_socket=new ServerSocket(6969);
     ArrayList<Socket> users=new ArrayList<Socket>();
-   
-   
-    
+
     while(true){
         Socket connecting_socket=server_socket.accept();
         users.add(connecting_socket);
